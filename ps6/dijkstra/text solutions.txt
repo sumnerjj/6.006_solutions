@@ -1,0 +1,18 @@
+6.1
+for i = 1 to K:
+
+perform a breadth first search. at each node, check each neighbor for best path of length i-1. store the current best path as current node + path from best neighbor. at kth iteration, return the best path of length <= k for each node.
+
+each bfs takes time E, so total time is k*E.
+
+6.2
+a.
+Assume edge from u to v (u,v) represents the relationship u depends on v.
+do topological sort as described in lecture. 
+for each vertex v in V:
+do dfs;
+at each node in dfs, mark the vertex with a time counter when the vertex is finished.
+output list of times (first finished is first installed)
+
+b. same as above, but outer loop only iterates over set of libraries which need to be installed, P.
+
