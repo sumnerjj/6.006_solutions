@@ -206,13 +206,11 @@ class PathFinder(object):
                 node.key = NodeDistancePair(node, float('inf'))
             queue.insert(node.key)
         visited = []
-        print "asd initialized"
         while len(queue.heap) > 1:
             ukey = queue.extract_min()
             ukey.node.visited = True
             visited.append(ukey.node)
             if ukey.node is destination:
-                print "reached destination"
                 current = ukey.node
                 ans = [current]
                 while current.p:
