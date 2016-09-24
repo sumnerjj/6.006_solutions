@@ -195,21 +195,40 @@ class PathFinder(object):
             A tuple: (the path as a list of nodes from source to destination, 
                       the number of visited nodes)
         """
+        print "dijkstra asd"
         queue = PriorityQueue()
-        queue.insert(NodeDistancePair(source, 0))
         for node in nodes:
-            node.key = NodeDistancePair(node, float('inf'))
+            node.visited = False
+            if node is source:
+                node.key = NodeDistancePair(node, 0)
+                node.p = None
+            else:
+                node.key = NodeDistancePair(node, float('inf'))
             queue.insert(node.key)
         visited = []
+        print "asd initialized"
         while len(queue.heap) > 1:
-            u = queue.extract_min()
-            visited.append(u)
-            for v in u[0].adj:
+            ukey = queue.extract_min()
+            ukey.node.visited = True
+            visited.append(ukey.node)
+            if ukey.node is destination:
+                print "reached destination"
+                current = ukey.node
+                ans = [current]
+                while current.p:
+                    ans.append(current.p)
+                    current = current.p
+                ans.reverse()
+                return (ans, len(visited))
 
+            for v in ukey.node.adj:
+                # relax edge
+                vkey = v.key
+                if ( ukey.distance + weight(ukey.node, vkey.node) ) < vkey.distance:
+                    vkey.distance = ukey.distance + weight(ukey.node, vkey.node)
+                    vkey.node.p = ukey.node
+                    queue.decrease_key(vkey)
 
-
-        return NotImplemented 
-        
     @staticmethod
     def from_file(file, network):
         """Creates a PathFinder object with source and destination read from 
