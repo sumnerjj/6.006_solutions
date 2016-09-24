@@ -195,6 +195,19 @@ class PathFinder(object):
             A tuple: (the path as a list of nodes from source to destination, 
                       the number of visited nodes)
         """
+        queue = PriorityQueue()
+        queue.insert(NodeDistancePair(source, 0))
+        for node in nodes:
+            node.key = NodeDistancePair(node, float('inf'))
+            queue.insert(node.key)
+        visited = []
+        while len(queue.heap) > 1:
+            u = queue.extract_min()
+            visited.append(u)
+            for v in u[0].adj:
+
+
+
         return NotImplemented 
         
     @staticmethod

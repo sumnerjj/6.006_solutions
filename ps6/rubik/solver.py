@@ -19,11 +19,10 @@ def shortest_path(start, end):
 
     while left_depth < 8:
         for x in left_current.keys():
-            for y in right_current.keys():
-                if x == y:
-                    ans = left_current[x] + [ rubik.inverse(move) for move in reversed(right_current[y]) ]
-                    print "ans: ", ans, "len: ", len(ans)
-                    return ans
+            y = right_current.get(x, None)
+            if y is not None:
+                ans = left_current[x] + [ rubik.perm_inverse(move) for move in reversed(y) ]
+                return ans
         for x in left_current.keys():
             for move in rubik.quarter_twists:
                 r = rubik.perm_apply(move,x)
@@ -36,11 +35,10 @@ def shortest_path(start, end):
 
     while right_depth < 8:
         for x in right_current.keys():
-            for y in left_current.keys():
-                if x == y:
-                    ans = right_current[x] + [ rubik.inverse(move) for move in reversed(left_current[y]) ]
-                    print "ans: ", ans, "len: ", len(ans)
-                    return ans
+            y = left_current.get(x, None)
+            if y is not None:
+                ans = y + [ rubik.perm_inverse(move) for move in reversed(right_current[x]) ]
+                return ans
         for x in right_current.keys():
             for move in rubik.quarter_twists:
                 r = rubik.perm_apply(move,x)
@@ -51,6 +49,5 @@ def shortest_path(start, end):
         right_new = {}
         right_depth += 1
 
-    print "None"
     return None
 
