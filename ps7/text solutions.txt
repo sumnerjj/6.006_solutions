@@ -1,0 +1,28 @@
+7-2
+a. buy one share of Pear, end with $50
+b. buy one of Dale and one of Microwave, end with $86
+c. buy 10 of Dale, end with $390
+d. 4. capacity
+e. 1. items
+f. 2. size
+g. 3. value
+h. 1. not valid
+   2. not valid
+   3. valid
+   4. not valid
+   5. valid
+   6. not valid
+i. 10. count·total
+j. 10. count·total
+k. 1. count
+L. 1. count
+m. 1. count
+n. 5. profit[c,s]=max{profit[c,s−1],profit[c−start[s],s]+end[s]}
+o. 2. profit[c,s]=max{profit[c,s−1],profit[c−start[s],s−1]+end[s]}
+p. 5. STOCK-TABLE-B and STOCK-RESULT-B
+q. 3. STOCK-TABLE-A and STOCK-RESULT-C
+r. 1 of Pear and one of Dale, end with 87
+s. 3 Dale, 3 JNC, 2 Microwave, 1 Peap, end with 268
+t. Use pseudo code from stock-result A. Modify pseudocode from stock-table-A as follows. “if start[stock] ≤ cash” becomes “if start[stock] ≤ cash and limit[stock]>0”. Then, buy as much stock as you can (done in constant time by choosing the max(limit[stock], cash/start[stock]). Then enter that quantity in the purchase table, to be used in Stock-result-A.
+
+
