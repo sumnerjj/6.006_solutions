@@ -356,14 +356,7 @@ class PriorityQueue:
         if key is None:
             raise ValueError('Cannot insert None in the queue')
         self.queue.append(key)
-        index = len(self.queue) - 1
-        while index > 0 and self.queue[(index - 1)//2] > self.queue[index]:
-            a, b = self.queue[(index - 1)//2], self.queue[index]
-            self.queue[(index - 1)//2], self.queue[index] = b, a
-            index = (index - 1)//2
-        """
         self.min_index = None
-        """
     
     def min(self):
         """The smallest element in the queue."""
@@ -371,22 +364,6 @@ class PriorityQueue:
             return None
         self._find_min()
         return self.queue[self.min_index]
-
-    def min_heapify(self, index):
-        # min heapify the queue on the given index
-        L = 2*index + 1
-        R = 2*index + 2
-        if L < len(self.queue) and self.queue[L] < self.queue[index]:
-            smallest = L
-        else:
-            smallest = index
-        if R < len(self.queue) and self.queue[R] < self.queue[smallest]:
-            smallest = R
-        if smallest != index:
-            a, b = self.queue[smallest], self.queue[index]
-            self.queue[smallest], self.queue[index] = b, a
-            self.min_heapify(smallest)
-            
     
     def pop(self):
         """Removes the minimum element in the queue.
@@ -396,20 +373,10 @@ class PriorityQueue:
         """
         if len(self.queue) == 0:
             return None
-        
         self._find_min()
-        popped_key = self.queue[0]
-        self.queue[0] = self.queue[-1]
-        asd = self.queue.pop()
-        self.min_heapify(0)
-        """
         popped_key = self.queue.pop(self.min_index)
         self.min_index = None
-        """
         return popped_key
-        
-        
-        
     
     def _find_min(self):
         # Computes the index of the minimum element in the queue.
@@ -419,13 +386,11 @@ class PriorityQueue:
             return
         min = self.queue[0]
         self.min_index = 0
-        """
         for i in xrange(1, len(self.queue)):
             key = self.queue[i]
             if key < min:
                 min = key
                 self.min_index = i
-        """
 
 class Simulation:
     """State needed to compute a circuit's state as it evolves over time."""
